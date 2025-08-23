@@ -10,23 +10,6 @@ function ifErrorThrow(error: unknown) {
   }
 }
 
-// Comment - subcollection: recipes/{recipeId}/comments/{authorId}
-type CommentSeed = {
-  recipeId: string;
-  authorId: string;
-  text: string;
-  createdAt: Date;
-};
-
-// Like - subcollection: recipes/{recipeId}/likes/{authorId}
-
-type Like = {
-  recipeId: string;
-  authorId: string;
-  liked: boolean;
-  updatedAt?: Date | null;
-};
-
 // Doc constructor
 
 const now = new Date();
@@ -189,3 +172,75 @@ const initRecipe: RecipeSeed = {
 };
 
 seedDoc<RecipeSeed>("recipes", initRecipe.recipeId, initRecipe);
+
+async function seedSubDoc<T extends { [key: string]: unknown }>(
+  parentCollection: string,
+  parrentId: string,
+  subCollection: string,
+  subCollectionId: string,
+  data: T
+) {
+  try {
+    const path = `${parentCollection}/${parrentId}/${subCollection}`;
+    const ref = doc(db, path, subCollectionId);
+    const snapshot = await getDoc(ref);
+
+    if (!snapshot.exists()) {
+      await setDoc(ref, data);
+      console.log(`✅ created: ${path}/${subCollectionId}`);
+    } else {
+      console.log(`⏭️ skipped (already exist): ${path}/${subCollectionId}`);
+    }
+  } catch (error) {
+    ifErrorThrow(error);
+  }
+}
+
+// Comment - subcollection: recipes/{recipeId}/comments/{authorId}
+type CommentSeed = {
+  recipeId: string;
+  commentId: string;
+  authorId: string;
+  text: string;
+  createdAt: Date;
+};
+
+const initComment: CommentSeed = {
+  recipeId: initRecipe.recipeId,
+  commentId: "initCommentId",
+  authorId: initUser.userId,
+  text: "init message",
+  createdAt: now,
+};
+
+seedSubDoc<CommentSeed>(
+  "recipes",
+  initComment.recipeId,
+  "comments",
+  initComment.commentId,
+  initComment
+);
+
+// Like - subcollection: recipes/{recipeId}/likes/{authorId}
+
+type Like = {
+  recipeId: string;
+  authorId: string;
+  liked: boolean;
+  updatedAt?: Date | null;
+};
+
+const initLike: Like = {
+  recipeId: initRecipe.recipeId,
+  authorId: initUser.userId,
+  liked: true,
+  updatedAt: now,
+};
+
+seedSubDoc<Like>(
+  "recipes",
+  initLike.recipeId,
+  "likes",
+  initLike.authorId,
+  initLike
+);
