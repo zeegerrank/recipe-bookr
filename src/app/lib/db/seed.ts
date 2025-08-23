@@ -1,14 +1,27 @@
 import { db } from "../firebase/client";
 import { getDoc, setDoc, doc } from "firebase/firestore";
 
-async function setIfNotExist(path: string, data: unknown) {
-  const ref = doc(db, path);
-  const snapshot = await getDoc(ref);
-
-  if (!snapshot.exists()) {
-    await setDoc(ref, data);
-    console.log(`✅ created: ${path}`);
+//    Helper
+function ifErrorThrow(error: unknown) {
+  if (error instanceof Error) {
+    throw new Error(error.message);
   } else {
-    console.log(`⏭️ skipped (already exist): ${path}`);
+    throw new Error(String(error));
+  }
+}
+
+async function setIfNotExist(path: string, data: object) {
+  try {
+    const ref = doc(db, path);
+    const snapshot = await getDoc(ref);
+
+    if (!snapshot.exists()) {
+      await setDoc(ref, data);
+      console.log(`✅ created: ${path}`);
+    } else {
+      console.log(`⏭️ skipped (already exist): ${path}`);
+    }
+  } catch (error) {
+    ifErrorThrow(error);
   }
 }
