@@ -46,6 +46,12 @@ export type IngredientDoc = {
   createdAt: Date;
   updatedAt?: Date;
 };
+export type WriteIngredientDoc = {
+  ingredientId: string;
+  name: string;
+  gPerMl: number;
+  defaultUnit: Unit;
+};
 
 export type CommentDoc = {
   commentId: string;
