@@ -1,7 +1,7 @@
 export type Unit = "g" | "kg" | "ml" | "l" | "tsp" | "tbsp" | "cup" | "fl_oz";
 
 export type UserDoc = {
-  userId: string;
+  id: string;
   name: string;
   email: string;
   role: "user" | "editor" | "admin";
@@ -10,7 +10,7 @@ export type UserDoc = {
 };
 
 export type ProfileDisplayDoc = {
-  userId: string;
+  id: string;
   displayName: string;
   avatarURL?: string | null;
   bio?: string;
@@ -19,7 +19,7 @@ export type ProfileDisplayDoc = {
 };
 
 export type RecipeDoc = {
-  recipeId: string;
+  id: string;
   description: string | null;
   authorId: string;
   public: boolean;
@@ -31,7 +31,7 @@ export type RecipeDoc = {
 };
 
 export type RecipeIngredients = {
-  ingredientId: string;
+  id: string;
   name: string;
   amount: number;
   unit: Unit;
@@ -39,7 +39,7 @@ export type RecipeIngredients = {
 };
 
 export type IngredientDoc = {
-  ingredientId: string;
+  id: string;
   name: string;
   gPerMl: number;
   defaultUnit: Unit;
@@ -47,14 +47,14 @@ export type IngredientDoc = {
   updatedAt?: Date;
 };
 export type WriteIngredientDoc = {
-  ingredientId: string;
+  id: string;
   name: string;
   gPerMl: number;
   defaultUnit: Unit;
 };
 
 export type CommentDoc = {
-  commentId: string;
+  id: string;
   authorId: string;
   text: string;
   createdAt: Date;
@@ -62,7 +62,7 @@ export type CommentDoc = {
 };
 
 export type LikeDoc = {
-  authorId: string;
+  id: string;
   liked: boolean;
   updatedAt?: Date | null;
 };

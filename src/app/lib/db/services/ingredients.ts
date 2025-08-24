@@ -61,9 +61,7 @@ export async function getIngredientById(
 ): Promise<IngredientDoc | null> {
   const ref = doc(coll, id);
   const snap = await getDoc(ref);
-  return snap.exists()
-    ? { ...(snap.data() as IngredientDoc), ingredientId: snap.id }
-    : null;
+  return snap.exists() ? { ...(snap.data() as IngredientDoc) } : null;
 }
 
 // list
@@ -79,7 +77,6 @@ export async function listIngredients(options?: {
   const snap = await getDocs(result);
   return snap.docs.map((doc) => ({
     ...(doc.data() as IngredientDoc),
-    ingredientId: doc.id,
   }));
 }
 
