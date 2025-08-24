@@ -1,6 +1,6 @@
 export type Unit = "g" | "kg" | "ml" | "l" | "tsp" | "tbsp" | "cup" | "fl_oz";
 
-export type UserSeed = {
+export type UserDoc = {
   userId: string;
   name: string;
   email: string;
@@ -9,7 +9,7 @@ export type UserSeed = {
   updatedAt?: Date;
 };
 
-export type ProfileDisplaySeed = {
+export type ProfileDisplayDoc = {
   userId: string;
   displayName: string;
   avatarURL?: string | null;
@@ -18,7 +18,7 @@ export type ProfileDisplaySeed = {
   updatedAt?: Date;
 };
 
-export type RecipeSeed = {
+export type RecipeDoc = {
   recipeId: string;
   description: string | null;
   authorId: string;
@@ -38,7 +38,7 @@ export type RecipeIngredients = {
   notes: string | null;
 };
 
-export type IngredientSeed = {
+export type IngredientDoc = {
   ingredientId: string;
   name: string;
   gPerMl: number;
@@ -47,7 +47,7 @@ export type IngredientSeed = {
   updatedAt?: Date;
 };
 
-export type CommentSeed = {
+export type CommentDoc = {
   commentId: string;
   authorId: string;
   text: string;
@@ -55,7 +55,7 @@ export type CommentSeed = {
   updatedAt?: Date;
 };
 
-export type LikeSeed = {
+export type LikeDoc = {
   authorId: string;
   liked: boolean;
   updatedAt?: Date | null;
