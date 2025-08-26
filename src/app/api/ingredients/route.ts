@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ id: result.id, status: 201 });
   } catch (e: unknown) {
-    const msg = e?.message ?? "Internal error";
+    const msg = e instanceof Error ? e.message : "Internal error";
     return NextResponse.json({ error: msg, status: 500 });
   }
 }
