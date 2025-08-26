@@ -24,7 +24,7 @@ export type CreateIngredientResult = {
 };
 export async function createIngredient(
   id: string,
-  data: WriteIngredientDoc
+  data: Partial<WriteIngredientDoc>
 ): Promise<CreateIngredientResult> {
   const ref = doc(coll, id);
   const snap = await getDoc(ref);
