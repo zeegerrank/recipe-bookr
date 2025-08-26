@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     const orderByField = searchParams.get(
       "orderByField"
     ) as keyof IngredientDoc;
-    const items = listIngredients({ orderByField, qLimit: limit });
+    const items = await listIngredients({ orderByField, qLimit: limit });
 
     return NextResponse.json(items, { status: 200 });
   } catch (e: unknown) {
