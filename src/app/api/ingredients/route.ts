@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ingredientCreateValidator } from "@/app/lib/db/validator/ingredients";
+import { ingredientCreateValidator } from "@/app/lib/db/validators/ingredients";
 import {
   listIngredients,
   createIngredient,

@@ -4,7 +4,7 @@ import {
   updateIngredient,
   deleteIngredient,
 } from "@/app/lib/db/services/ingredients";
-import { ingredientUpdateValidator } from "@/app/lib/db/validator/ingredients";
+import { ingredientUpdateValidator } from "@/app/lib/db/validators/ingredients";
 
 // GET /api/ingredients/:id
 export async function GET(
