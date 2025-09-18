@@ -11,9 +11,10 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase/client";
+import { getDb } from "../../firebase/client";
 import { IngredientDoc, WriteIngredientDoc } from "./types";
 
+const db = getDb();
 const coll = collection(db, "ingredients");
 
 // create

@@ -1,17 +1,26 @@
 import { firebaseConfig } from "../config/firebase.config";
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth, connectAuthEmulator } from "firebase/auth";
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getAuth as _getAuth, connectAuthEmulator } from "firebase/auth";
+import {
+  getFirestore as _getFirestore,
+  connectFirestoreEmulator,
+} from "firebase/firestore";
 
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-
-export function getDb() {
-  return db;
+function getAppInstance() {
+  return getApps().length ? getApp() : initializeApp(firebaseConfig);
 }
 
-if (process.env.NODE_ENV === "development") {
-  connectFirestoreEmulator(db, "localhost", 8080);
-  connectAuthEmulator(auth, "http://localhost:9099");
+export function getDb() {
+  const db = _getFirestore(getAppInstance());
+  if (process.env.NODE_ENV === "development") {
+    connectFirestoreEmulator(db, "localhost", 8080);
+  }
+  return db;
+}
+export function getAuth() {
+  const auth = _getAuth(getAppInstance());
+  if (process.env.NODE_ENV === "development") {
+    connectAuthEmulator(auth, "http://localhost:9099");
+  }
+  return auth;
 }
