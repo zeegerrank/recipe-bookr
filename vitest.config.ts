@@ -9,6 +9,7 @@ export default defineConfig({
     include: ["src/**/*.{int,test,spec}.ts"],
     clearMocks: true,
     restoreMocks: true,
+    reporters: ["verbose"],
   },
   resolve: {
     alias: {

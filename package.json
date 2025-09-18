@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "test": "vitest",
+    "test": "vitest watch",
     "test:int": "cross-env NODE_ENV=test firebase emulators:exec --project demo-recipebookr \"vitest run\"",
     "emulators": "firebase emulators:start --only firestore",
     "build": "next build",
