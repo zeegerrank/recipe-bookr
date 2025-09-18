@@ -6,7 +6,7 @@ import {
 
 describe("IngredientCreateValidator", () => {
   // Expected
-  it("accept valid a valid ingredient", () => {
+  it("accept valid ingredient", () => {
     const name = "potato";
     const data = { id: name, name, gPerMl: 0.59, defaultUnit: "g" };
     const parsed = ingredientCreateValidator.parse(data);
@@ -57,7 +57,7 @@ describe("IngredientCreateValidator", () => {
 
 describe("ingredientUpdateValidator", () => {
   // Expected
-  it("accept valid a valid ingredient", () => {
+  it("accept valid ingredient", () => {
     const data = { name: "potato", gPerMl: 0.59, defaultUnit: "g" };
     const parsed = ingredientUpdateValidator.parse(data);
     expect(parsed).toMatchObject(data);
@@ -76,7 +76,7 @@ describe("ingredientUpdateValidator", () => {
     const bad = { name: "potato", gPerMl: -0.59, defaultUnit: "g" };
     expect(() => ingredientUpdateValidator.parse(bad)).toThrow();
   });
-  it("reject if density is negative numbers", () => {
+  it("reject if density is zero", () => {
     const bad = { name: "potato", gPerMl: 0, defaultUnit: "g" };
     expect(() => ingredientUpdateValidator.parse(bad)).toThrow();
   });
